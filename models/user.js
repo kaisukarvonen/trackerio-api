@@ -25,7 +25,8 @@ userSchema.statics.authenticate = (username, password, callback) => {
   });
 };
 
-userSchema.pre('save', next => {
+/* eslint-disable */
+userSchema.pre('save', function(next) {
   const user = this;
   bcrypt.hash(user.password, 10, (err, hash) => {
     if (err) {
@@ -35,6 +36,8 @@ userSchema.pre('save', next => {
     next();
   });
 });
+
+/* eslint-enable */
 
 const User = mongoose.model('User', userSchema);
 export default User;
